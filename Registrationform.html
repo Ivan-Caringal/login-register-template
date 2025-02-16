@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/font-awesome.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="images/mabinilogo.png" />
+    <title>Login Barangay</title>
+
+    <style>
+      .navbar .btn-outline-light:hover {
+        color: #000000;
+      }
+      body {
+        background: url(../images/pio.jpg) center top no-repeat;
+        background-size: 100% 50vh;
+        background-attachment: scroll;
+        min-height: 50vh;
+        margin: 0;
+        padding-top: 0;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          background-size: 100% 50vh;
+        }
+
+        .nav-link {
+          color: #000;
+          background-color: #f0f0f0;
+          padding: 5px 10px;
+          border-radius: 4px;
+        }
+      }
+
+      .card-overlay {
+        width: 100%;
+        max-width: 450px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg  navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="images/mabinilogo.png" alt="Logo" width="48" height="48" />
+          <span class="fw-semibold">Welcome to CBMMS 2.0</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link fw-semibold" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold" href="about.html">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold" href="about.html">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold" href="about.html">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="hero text-white pt-7">
+        <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+          <!-- Card overlay -->
+          <div class="card card-overlay rounded-5 shadow-lg border-0 p-3">
+            <div class="card-body">
+              <h1 class="text-start text-dark">Registration</h1>
+              <hr class="my-4 border-dark" style="border-width: 3px;">
+              <p class="text-start text-secondary">Barangay Officials</p>
+              <p class="text-start text-dark">Please enter your credentials to sign in</p>
+              <form>
+                <div class="mb-2">
+                  <label for="name" class="form-label mb-3 text-dark">Name</label>
+                  <input type="name" class="form-control" id="name" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="mb-2">
+                  <label for="email" class="form-label mb-3 text-dark">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-2">
+                  <label for="mobile" class="form-label mb-3 text-dark">Mobile Number</label>
+                  <input type="tel" class="form-control" id="mobile" placeholder="Enter your mobile number ex(09xxxxxxxxx)" pattern="[0-9]{11}" inputmode="numeric" required>
+                </div>
+                <div class="mb-2">
+                  <label for="barangay" class="form-label mb-3 text-dark">Barangay</label>
+                  <select class="form-select" id="barangay" required>
+                    <option value="" selected disabled>Select your barangay</option>
+                    <option value="barangay1">Barangay 1</option>
+                    <option value="barangay2">Barangay 2</option>
+                    <option value="barangay3">Barangay 3</option>
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <label for="position" class="form-label mb-3 text-dark">Position</label>
+                  <select class="form-select" id="position" required>
+                    <option value="" selected disabled>Select your position</option>
+                    <option value="chairman">Chairman</option>
+                    <option value="kagawad">Kagawad</option>
+                    <option value="secretary">Secretary</option>
+                    <option value="treasurer">Treasurer</option>
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <label for="barangayCode" class="form-label mb-3 text-dark">Barangay Code</label>
+                  <input type="text" class="form-control" id="barangayCode" placeholder="Enter 10-digit barangay code" pattern="[0-9]{10}" inputmode="numeric" required>
+                </div>
+                <div class="mb-1">
+                  <label for="password" class="form-label mb-3 text-dark">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                </div>
+                <div class="mb-1">
+                  <label for="confirmPassword" class="form-label mb-3 text-dark">Confirm Password</label>
+                  <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+
+               <div class="d-flex justify-content-between p-2">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                  <label class="form-check-label text-dark" for="agreeTerms">
+                    I agree to the <a href="#terms-and-conditions" class="text-primary">terms and conditions</a>
+                  </label>
+                </div>
+              </div>
+
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary rounded-5 mt-3">Registrer</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
+
+
+
+
+
+<!-- confirtm password logic
+<script>
+  const password = document.getElementById('password');
+  const confirmPassword = document.getElementById('confirmPassword');
+
+  confirmPassword.addEventListener('input', function () {
+    if (password.value !== confirmPassword.value) {
+      confirmPassword.setCustomValidity("Passwords do not match");
+    } else {
+      confirmPassword.setCustomValidity("");
+    }
+  });
+</script> -->
+
