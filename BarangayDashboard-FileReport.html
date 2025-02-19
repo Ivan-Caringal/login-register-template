@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barangay Staff - File Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="images/mabinilogo.png" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            display: flex;
+            overflow: hidden;
+        }
+        #sidebar {
+            min-width: 250px;
+            max-width: 250px;
+            height: 100vh;
+            overflow-y: auto;
+            background: #0d6efd;
+            color: white;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        #sidebar.collapsed {
+            min-width: 80px;
+            max-width: 80px;
+        }
+        .sidebar-item {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            width: 100%;
+            color: white;
+            text-decoration: none;
+            padding-left: 30px;
+            border-radius: 0;
+        }
+        .sidebar-item:hover, .sidebar-item.active {
+            background: white;
+            color: #0d6efd;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+        .sidebar-item i {
+            margin-right: 10px;
+        }
+        #sidebar.collapsed .sidebar-item span {
+            display: none;
+        }
+        #logo {
+            width: 100px;
+            margin: 20px 0;
+            transition: all 0.3s;
+            padding-top: 50px;
+        }
+        #sidebar.collapsed #logo {
+            width: 50px;
+        }
+        #toggleSidebar {
+            position: absolute;
+            right: 5px;
+            color: white;
+            background-color: #0d6efd;
+            border: none;
+        }
+        #homeIcon {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            padding-left: 20px;
+        }
+        #content {
+            flex-grow: 1;
+            padding: 80px;
+            overflow-y: auto;
+            height: 100vh;
+            position: relative;
+        }
+        .map-container {
+            width: 100%;
+            max-width: 300px; 
+            height: 500px; 
+            background-color: #3B82F6; 
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto; 
+            
+        }
+
+       
+        #map {
+            width: 95%;
+            height: 90%;
+            border-radius: 10px;
+        }
+
+      
+        .map-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 70%;
+            position: absolute;
+            bottom: 15px;
+        }
+
+        .map-buttons button {
+            background: white;
+            border: none;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .map-buttons button:active {
+            background: #ddd;
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+        }
+        .btn-primary {
+            width: 20%;
+            border-radius: 10px;
+            float: right;
+            margin-right: 150px;
+          
+        }
+        
+        .form-label {
+             margin-top: 20px; 
+        }
+
+    </style>
+</head>
+<body>
+    <div id="sidebar" class="d-flex flex-column">
+        <a href="BarangayDashboard-LandingPage.html" id="homeIcon" class="bi bi-house-door"></a>
+        <button class="btn btn-light m-3" id="toggleSidebar">☰</button>
+        <img src="images/mabinilogo.png" alt="Logo" id="logo">
+        <a href="BarangayDashboard-Dashboard.html" class="sidebar-item"> <i class="bi bi-speedometer2"></i> <span>Dashboard</span></a>
+        <a href="BarangayDashboard-FileReport.html" class="sidebar-item active"> <i class="bi bi-file-earmark-text"></i> <span>File Report</span></a>
+        <a href="BarangayDashboard-BarangayDetails.html" class="sidebar-item"> <i class="bi bi-building"></i> <span>Barangay Details</span></a>
+        <a href="BarangayDashboard-ReportLog.html" class="sidebar-item"> <i class="bi bi-journal-text"></i> <span>Report Log</span></a>
+    </div>
+    <div id="content">
+        <h2>Filing Report</h2>
+        <p>Report ID: 1234</p>
+        <p>Reporter Name: Juan Dela Cruz &nbsp;&nbsp; Barangay #: Pob 5</p>
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <label class="form-label">Enter Full Name of Resident</label>
+                <input type="text" class="form-control" placeholder="Full name">
+                
+                <label class="form-label mt-3">Barangay Street</label>
+                <input type="text" class="form-control" placeholder="Enter Barangay Street">
+                
+                <label class="form-label mt-3">Severity Level</label>
+                <select class="form-select">
+                    <option value="" disabled selected>Select Severity Level</option>
+                    <option>Informational</option>
+                    <option>Minor</option>
+                    <option>Major</option>
+                    <option>Critical</option>
+                </select>
+                
+                
+                <div class="row mt-3">
+                    <div class="col">
+                        <label class="form-label">Select Year</label>
+                        <select class="form-select">
+                            <option value="" disabled selected>Select Year</option>
+                            <option>2024</option>
+                            <option>2025</option>
+                            <option>2026</option>
+                            <option>2027</option>
+                            <option>2028</option>
+                            <option>2029</option>
+                            <option>2030</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Select Month</label>
+                        <select class="form-select">
+                            <option value="" disabled selected>Select Month</option>
+                            <option>January</option>
+                            <option>February</option>
+                            <option>March</option>
+                            <option>April</option>
+                            <option>May</option>
+                            <option>June</option>
+                            <option>July</option>
+                            <option>August</option>
+                            <option>September</option>
+                            <option>October</option>
+                            <option>November</option>
+                            <option>December</option>
+                            
+
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Select Day</label>
+                        <select class="form-select">
+                            <option value="" disabled selected>Select Day</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                            <option>24</option>
+                            <option>25</option>
+                            <option>26</option>
+                            <option>27</option>
+                            <option>28</option>
+                            <option>29</option>
+                            <option>30</option>
+                            <option>31</option>
+                        </select>
+                    </div>
+                </div>
+                <label class="form-label mt-3">Select Time</label>
+                <input type="time" class="form-control">
+                
+                <label class="form-label mt-3">Description</label>
+                <textarea class="form-control" placeholder="Enter Description"></textarea>
+                
+                <label class="form-label mt-3">Attachments</label>
+                <input type="file" class="form-control">
+            </div>
+            <div class="col-md-3 ">
+                <div class="map-container">
+                    <div id="map"></div>
+                
+
+                <div class="map-buttons">
+                    <button onclick="enableAddPin()">➕</button>
+                    <button onclick="enableRemovePin()">➖</button>
+                    <button onclick="resetMap()">✏️</button>
+                </div>
+                </div>
+            
+                <!-- Leaflet JS -->
+                <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+                <script>
+                    let map = L.map('map').setView([13.7573, 120.9383], 16); // Center at Mabini
+            
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(map);
+            
+                    let isAdding = false;
+                    let isRemoving = false;
+                    let markers = [];
+            
+                   
+                    function enableAddPin() {
+                        isAdding = true;
+                        isRemoving = false;
+                    }
+            
+                  
+                    function enableRemovePin() {
+                        isRemoving = true;
+                        isAdding = false;
+                    }
+            
+              
+                    map.on('click', function(e) {
+                        if (isAdding) {
+                            let marker = L.marker(e.latlng).addTo(map)
+                                .bindPopup("Pinned at " + e.latlng.toString()).openPopup();
+                            markers.push(marker);
+                        } 
+                        else if (isRemoving) {
+                            for (let i = markers.length - 1; i >= 0; i--) {
+                                if (map.getBounds().contains(markers[i].getLatLng())) {
+                                    map.removeLayer(markers[i]);
+                                    markers.splice(i, 1);
+                                    break;
+                                }
+                            }
+                        }
+                    });
+            
+            
+                    function resetMap() {
+                        markers.forEach(marker => map.removeLayer(marker));
+                        markers = [];
+                    }
+                </script>
+
+                    <label class="form-label mt-3">Incident Type</label>
+                    <textarea class="form-control" placeholder="Enter Incident Type"></textarea>
+
+           
+    
+            </div>
+        </div>
+        <button class="btn btn-primary">Submit Report</button>
+    </div>
+    <script>
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+        });
+
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
