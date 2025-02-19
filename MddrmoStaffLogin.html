@@ -19,12 +19,23 @@
             color: #000000; /* Replace #000000 with any valid color code */
         }
         body {
-          background: url(../images/cold.png) center top no-repeat;
+          background: url(../images/MdrmmoLastedit.png) center top no-repeat;
           background-size: 100% 60%;
-          
           min-height: 50%;
           margin: 0;
           padding-top: 0;
+          position: relative;
+        }
+
+        body::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 60%; /* Matches the background height */
+          background: rgba(0, 0, 0, 0.45);
+          z-index: -1; /* Keeps it behind other elements */
         }
 
 
